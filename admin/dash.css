@@ -1,0 +1,124 @@
+body {
+   margin: 0;
+   font-family: Arial, sans-serif;
+   background-color: #2b0303;
+}
+
+/* Add this to your existing style.css */
+
+/* Sidebar for larger screens */
+
+.sidebar {
+   width: 250px;
+   height: 100%;
+   background-color: #f8fae5;
+   position: fixed;
+   padding-top: 20px;
+   transition: 0.3s;
+}
+
+.sidebar .logo {
+   text-align: center;
+}
+
+.sidebar ul {
+   list-style-type: none;
+   padding: 0;
+   display: flex;
+   flex-direction: column;
+   margin-left: 20%;
+   margin-top: 30px;
+   text-align: justify;
+}
+
+.sidebar li {
+   padding: 20px;
+  
+}
+
+.sidebar a {
+   color: #000;
+   text-decoration: none;
+   transition: ease-in-out 250ms;
+}
+
+.sidebar a:hover {
+   background-color: #a76430;
+   color: #f8fae5;
+   padding: 10px 15px;
+   border-radius: 20px;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+   .sidebar {
+       width: 0;
+       overflow: hidden;
+   }
+
+   .sidebar ul {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+   }
+
+   .sidebar.responsive {
+       width: 100%;
+   }
+}
+
+.content {
+   margin-left: 250px;
+   padding: 20px;
+   color: #f8fae5;
+}
+
+.header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 20px;
+   margin-top: 10px;
+}
+
+.date-time {
+   font-size: 18px;
+}
+
+.user-profile a {
+   color: #3498db;
+   text-decoration: none;
+}
+
+.summary {
+   display: flex;
+   justify-content: space-around;
+   margin: 90px 0;
+}
+
+.summary-item {
+   display: grid;
+   place-content: center;
+   text-align: center;
+   width: 200px;
+   height: 200px;
+   background-color: #f8fae5;
+   color: #000;
+}
+
+.recent-orders table {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+.recent-orders th, .recent-orders td {
+   border: 1px solid #ddd;
+   padding: 8px;
+   text-align: left;
+}
+
+.recent-orders th {
+   background-color: #4CAF50;
+   color: white;
+}
+
