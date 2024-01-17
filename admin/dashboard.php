@@ -79,8 +79,7 @@
         <table>
             <!-- Table header -->
             <tr>
-                <th>Customer Number</th>
-                <th>Product Code</th>
+                <th>Order ID</th>
                 <th>Product Name</th>
                 <th>Price</th>
                 <th>Quantity</th>
@@ -91,7 +90,6 @@
             <!-- Table data (you can dynamically populate this using PHP) -->
             <tr>
                 <td>001</td>
-                <td>P001</td>
                 <td>Product A</td>
                 <td>$20.00</td>
                 <td>2</td>

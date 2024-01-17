@@ -223,6 +223,7 @@
             <button onclick="calculateChange()">Save</button>
 
             <div id="changeAmount">Change: ₱0.00</div>
+            <button onclick="processPayment()">Pay</button>
         </div>
     </div>
 </div>
@@ -304,19 +305,43 @@ let orderId = 1;
         updateTotalAmount();
     }
 
-    // Function to delete a row from the order table
-    function deleteRow(button) {
-        const row = button.parentElement.parentElement;
-        const price = parseFloat(row.querySelector('.price-cell').innerText);
-        const quantity = parseInt(row.querySelector('.quantity-cell').innerText);
+   // Function to delete a row from the order table
+function deleteRow(button) {
+    const row = button.parentElement.parentElement;
+    const price = parseFloat(row.querySelector('.price-cell').innerText);
+    const quantity = parseInt(row.querySelector('.quantity-cell').innerText);
 
-        // Update total amount
-        totalAmount -= price * quantity;
-        updateTotalAmount();
+    // Update total amount
+    totalAmount -= price * quantity;
+    updateTotalAmount();
 
-        // Remove the row
-        row.remove();
+    // Get the ID of the row being deleted
+    const deletedId = parseInt(row.querySelector('td').innerText);
+
+    // Remove the row
+    row.remove();
+
+    // Update the IDs of the remaining rows
+    const tableBody = document.querySelector('#orderTable tbody');
+    const rows = tableBody.querySelectorAll('tr');
+    rows.forEach((row, index) => {
+        const idCell = row.querySelector('td:first-child');
+        const currentId = parseInt(idCell.innerText);
+        
+        // If the current row's ID is greater than the deleted row's ID, decrement it
+        if (currentId > deletedId) {
+            idCell.innerText = currentId - 1;
+        }
+    });
+
+    // Decrement the global orderId
+    orderId--;
+
+    // Ensure orderId does not go below 1
+    if (orderId < 1) {
+        orderId = 1;
     }
+}
 
     // Function to add quantity to an item in the order table
     function addQuantity(button) {
@@ -414,6 +439,39 @@ function displayMenu(products) {
             menuSection.appendChild(menuItem);
         });
     });
+}
+
+function processPayment() {
+    const paymentAmount = parseFloat(document.getElementById('paymentAmount').value);
+
+    // Validate input
+    if (isNaN(paymentAmount) || paymentAmount < totalAmount) {
+        alert('Invalid payment amount. Please enter a valid amount.');
+        return;
+    }
+
+    // Calculate change amount
+    const changeAmount = paymentAmount - totalAmount;
+
+    // Perform payment processing logic (you can replace this with your actual payment logic)
+    alert(`Payment successful!\nTotal Amount: ₱${totalAmount.toFixed(2)}\nAmount Received: ₱${paymentAmount.toFixed(2)}\nChange: ₱${changeAmount.toFixed(2)}`);
+
+    // Reset order table and payment section
+    resetOrderTable();
+}
+
+function resetOrderTable() {
+    // Clear the order table
+    const tableBody = document.querySelector('#orderTable tbody');
+    tableBody.innerHTML = '';
+
+    // Reset total amount
+    totalAmount = 0;
+    updateTotalAmount();
+
+    // Reset payment input and change amount display
+    document.getElementById('paymentAmount').value = '';
+    document.getElementById('changeAmount').textContent = 'Change: ₱0.00';
 }
 
 </script>
